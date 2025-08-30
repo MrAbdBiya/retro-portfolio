@@ -126,6 +126,9 @@ const Terminal: React.FC = () => {
             case 'all':
                  response = { type: HistoryItemType.RESPONSE, text: (
                     <div>
+                        <div className="mb-4">
+                            <img src={PROFILE_IMAGE_BASE64} alt="Abdessamad Biya" className="w-32 h-32 object-cover border-2 border-green-400" />
+                        </div>
                         <h3 className='text-xl text-yellow-400 underline'>À PROPOS</h3>
                         <p>{CV_DATA.about}</p>
                         <h3 className='text-xl text-yellow-400 underline mt-4'>EXPÉRIENCE</h3>

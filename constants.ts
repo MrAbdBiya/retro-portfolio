@@ -1,6 +1,5 @@
-import photoImage from './photo.png';
-
-export const PROFILE_IMAGE_BASE64 = photoImage;
+// Use the image from the public folder
+export const PROFILE_IMAGE_BASE64 = '/photo.png';
 export const WELCOME_MESSAGES = [
     "Initialisation du système...",
     "Connexion au réseau...",

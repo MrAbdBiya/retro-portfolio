@@ -1,13 +1,14 @@
 
-import { GoogleGenAI, Chat } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 import { CV_DATA } from '../constants';
 
-// A simple check for API key existence.
-if (!process.env.API_KEY) {
-  console.error("API_KEY environment variable not set.");
+// Prefer API key from Vite-defined envs (vite.config.ts maps GEMINI_API_KEY to process.env.API_KEY)
+const API_KEY = process.env.API_KEY || process.env.GEMINI_API_KEY;
+if (!API_KEY) {
+    console.error("Gemini API key is not set. Define GEMINI_API_KEY in .env.local.");
 }
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
+const ai = new GoogleGenAI({ apiKey: API_KEY! });
 
 const cvContext = `
 Vous êtes un assistant IA pour le portfolio d'Abdessamad Biya. 
@@ -52,33 +53,22 @@ Contact :
 Email: ${CV_DATA.contact.email}, LinkedIn: ${CV_DATA.contact.linkedin}
 `;
 
-let chat: Chat | null = null;
-
-const initializeChat = () => {
-    if (!chat) {
-        chat = ai.chats.create({
-            model: 'gemini-2.5-flash',
-            config: {
-                systemInstruction: cvContext,
-            },
-        });
-    }
-};
-
 export const chatWithAI = async (message: string): Promise<string> => {
-    if (!process.env.API_KEY) {
+    if (!API_KEY) {
         return "Erreur: La clé API Gemini n'est pas configurée.";
     }
 
     try {
-        initializeChat();
-        if (!chat) throw new Error("Chat initialization failed.");
-
-        const response = await chat.sendMessage({ message });
-        return response.text;
+        const response = await ai.models.generateContent({
+            model: 'gemini-2.5-flash',
+            contents: message,
+            config: {
+                systemInstruction: cvContext,
+            },
+        });
+        return response.text || "";
     } catch (error) {
         console.error("Error communicating with Gemini API:", error);
-        chat = null; // Reset chat on error
         return "Désolé, une erreur est survenue lors de la communication avec l'assistant IA.";
     }
 };
