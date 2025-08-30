@@ -77,9 +77,12 @@ function BarcaShowcase() {
             {players.map((p) => (
               <div key={p.name} className="aspect-[4/5] rounded-xl glass overflow-hidden flex items-end p-0 card-tilt" data-tilt>
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                {p.img ? (
-                  <img src={p.img} alt={p.name} className="absolute inset-0 w-full h-full object-cover" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display='none'; }} />
-                ) : null}
+                <img
+                  src={p.img || '/players/silhouette.svg'}
+                  alt={p.name}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/players/silhouette.svg'; }}
+                />
                 <div className="relative z-10 p-4">
                   <div className="text-sm text-white/70">#{p.number.toString().padStart(2,'0')}</div>
                   <div className="text-lg font-semibold drop-shadow">{p.name}</div>
