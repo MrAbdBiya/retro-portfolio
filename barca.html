@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FC Barcelona – Showcase</title>
-    <meta name="description" content="Showcase visuelle inspirée du FC Barcelona (non officielle)." />
+    <title>FC Barcelona – Concept Showcase</title>
+    <meta name="description" content="Showcase visuelle moderne inspirée du FC Barcelona (non officielle)." />
+    <meta name="theme-color" content="#0a0a0a" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Onest:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       :root {
@@ -15,40 +16,30 @@
         --barca-blue-2: #0A2A6B;
         --barca-grana: #A50044;
         --barca-gold: #FDB927;
-        --dark: #0a0a0a;
+        --ink: #0a0a0a;
       }
-      body { font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; background: #0a0a0a; }
-      /* Blaugrana diagonal stripes */
-      .blaugrana-bg {
-        background-image:
-          linear-gradient(135deg, rgba(10,10,10,0.85), rgba(10,10,10,0.2)),
-          repeating-linear-gradient(
-            135deg,
-            var(--barca-blue) 0px,
-            var(--barca-blue) 60px,
-            var(--barca-grana) 60px,
-            var(--barca-grana) 120px
-          );
+      body { font-family: 'Outfit', 'Onest', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; background: var(--ink); }
+      /* Animated gradient mesh background */
+      .mesh {
+        position: fixed; inset: -20% -20% auto -20%; height: 120vh; z-index: -1;
+        background:
+          radial-gradient(60% 60% at 20% 10%, rgba(165,0,68,0.35), transparent 60%),
+          radial-gradient(50% 50% at 80% 0%, rgba(0,77,152,0.35), transparent 60%),
+          radial-gradient(40% 50% at 60% 90%, rgba(253,185,39,0.25), transparent 60%);
+        filter: blur(60px);
+        animation: float 18s ease-in-out infinite alternate;
       }
-      .glass {
-        background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255,255,255,0.12);
+      @keyframes float {
+        from { transform: translateY(-4%) scale(1); }
+        to   { transform: translateY(4%)  scale(1.06); }
       }
-      .shine {
-        position: relative;
-        overflow: hidden;
-      }
-      .shine::after {
-        content: "";
-        position: absolute; inset: 0; pointer-events: none;
-        background: radial-gradient(800px 400px at var(--mx,50%) -20%, rgba(255,255,255,0.18), transparent 40%);
-        transition: background-position 150ms ease;
-      }
+      .glass { background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.12); }
+      .card-tilt { transform: perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)); transition: transform 120ms ease; }
     </style>
   </head>
   <body class="text-white">
+    <div class="mesh"></div>
     <div id="root"></div>
     <script type="module" src="/barca.tsx"></script>
   </body>
-</html>
+  </html>
