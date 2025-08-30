@@ -49,6 +49,7 @@ const Terminal: React.FC = () => {
                     <div>
                         <p>Commandes disponibles :</p>
                         <ul className="list-disc list-inside ml-4">
+                            <li><span className="text-yellow-400">barca</span> - Ouvre la page design FC Barcelona.</li>
                             <li><span className="text-yellow-400">about</span> - Affiche une brève introduction.</li>
                             <li><span className="text-yellow-400">skills</span> - Liste mes compétences techniques et financières.</li>
                             <li><span className="text-yellow-400">experience</span> - Détaille mon expérience professionnelle.</li>
@@ -177,6 +178,10 @@ const Terminal: React.FC = () => {
                 break;
 
             default:
+                if (cmd === 'barca') {
+                    window.location.href = '/barca.html';
+                    return;
+                }
                 response = { type: HistoryItemType.ERROR, text: `Commande non reconnue: ${cmd}. Tapez 'help' pour la liste des commandes.` };
                 break;
         }

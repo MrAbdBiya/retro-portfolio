@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FC Barcelona – Showcase</title>
+    <meta name="description" content="Showcase visuelle inspirée du FC Barcelona (non officielle)." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --barca-blue: #004D98;
+        --barca-blue-2: #0A2A6B;
+        --barca-grana: #A50044;
+        --barca-gold: #FDB927;
+        --dark: #0a0a0a;
+      }
+      body { font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; background: #0a0a0a; }
+      /* Blaugrana diagonal stripes */
+      .blaugrana-bg {
+        background-image:
+          linear-gradient(135deg, rgba(10,10,10,0.85), rgba(10,10,10,0.2)),
+          repeating-linear-gradient(
+            135deg,
+            var(--barca-blue) 0px,
+            var(--barca-blue) 60px,
+            var(--barca-grana) 60px,
+            var(--barca-grana) 120px
+          );
+      }
+      .glass {
+        background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.12);
+      }
+      .shine {
+        position: relative;
+        overflow: hidden;
+      }
+      .shine::after {
+        content: "";
+        position: absolute; inset: 0; pointer-events: none;
+        background: radial-gradient(800px 400px at var(--mx,50%) -20%, rgba(255,255,255,0.18), transparent 40%);
+        transition: background-position 150ms ease;
+      }
+    </style>
+  </head>
+  <body class="text-white">
+    <div id="root"></div>
+    <script type="module" src="/barca.tsx"></script>
+  </body>
+</html>
