@@ -16,15 +16,16 @@ function BarcaShowcase() {
     return () => window.removeEventListener('mousemove', handler);
   }, []);
 
+  const base = (import.meta as any).env?.BASE_URL || '/';
   const players: { name: string; number: number; img?: string }[] = [
-    { name: 'Marc-André ter Stegen', number: 1, img: '/players/terstegen.jpg' },
-    { name: 'Ronald Araújo', number: 4, img: '/players/araujo.jpg' },
-    { name: 'İlkay Gündoğan', number: 22, img: '/players/gundogan.jpg' },
-    { name: 'Pedri', number: 8, img: '/players/pedri.jpg' },
-    { name: 'Frenkie de Jong', number: 21, img: '/players/dejong.jpg' },
-    { name: 'Lamine Yamal', number: 27, img: '/players/yamal.jpg' },
-    { name: 'Robert Lewandowski', number: 9, img: '/players/lewa.jpg' },
-    { name: 'Raphinha', number: 11, img: '/players/raphinha.jpg' },
+    { name: 'Marc-André ter Stegen', number: 1, img: `${base}players/terstegen.jpg` },
+    { name: 'Ronald Araújo', number: 4, img: `${base}players/araujo.jpg` },
+    { name: 'İlkay Gündoğan', number: 22, img: `${base}players/gundogan.jpg` },
+    { name: 'Pedri', number: 8, img: `${base}players/pedri.jpg` },
+    { name: 'Frenkie de Jong', number: 21, img: `${base}players/dejong.jpg` },
+    { name: 'Lamine Yamal', number: 27, img: `${base}players/yamal.jpg` },
+    { name: 'Robert Lewandowski', number: 9, img: `${base}players/lewa.jpg` },
+    { name: 'Raphinha', number: 11, img: `${base}players/raphinha.jpg` },
   ];
 
   const kitCards = [
@@ -78,10 +79,10 @@ function BarcaShowcase() {
               <div key={p.name} className="aspect-[4/5] rounded-xl glass overflow-hidden flex items-end p-0 card-tilt" data-tilt>
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
                 <img
-                  src={p.img || '/players/silhouette.svg'}
+                  src={p.img || `${base}players/silhouette.svg`}
                   alt={p.name}
                   className="absolute inset-0 w-full h-full object-cover"
-                  onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/players/silhouette.svg'; }}
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).src = `${base}players/silhouette.svg`; }}
                 />
                 <div className="relative z-10 p-4">
                   <div className="text-sm text-white/70">#{p.number.toString().padStart(2,'0')}</div>

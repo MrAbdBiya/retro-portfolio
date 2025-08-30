@@ -179,7 +179,8 @@ const Terminal: React.FC = () => {
 
             default:
                 if (cmd === 'barca') {
-                    window.location.href = '/barca.html';
+                    const base = (import.meta as any).env?.BASE_URL || '/';
+                    window.location.href = `${base}barca.html`;
                     return;
                 }
                 response = { type: HistoryItemType.ERROR, text: `Commande non reconnue: ${cmd}. Tapez 'help' pour la liste des commandes.` };
