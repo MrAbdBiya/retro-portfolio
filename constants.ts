@@ -1,5 +1,5 @@
-// Use the image from the public folder
-export const PROFILE_IMAGE_BASE64 = '/photo.png';
+// Use the image from the public folder, respecting Vite base path
+export const PROFILE_IMAGE_BASE64 = `${import.meta.env.BASE_URL}photo.png`;
 export const WELCOME_MESSAGES = [
     "Initialisation du système...",
     "Connexion au réseau...",

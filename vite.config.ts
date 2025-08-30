@@ -7,8 +7,9 @@ export default defineConfig(({ mode }) => {
   // Base path for GitHub Pages: https://<user>.github.io/<repo>/
   base: '/retro-portfolio/',
       define: {
-        'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
+        // Provide safe fallbacks so CI builds without a key
+        'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY || ''),
+        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY || '')
       },
       resolve: {
         alias: {
