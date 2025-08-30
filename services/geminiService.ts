@@ -1,5 +1,4 @@
 
-import { GoogleGenAI } from "@google/genai";
 import { CV_DATA } from '../constants';
 
 // Prefer API key from Vite-defined envs (vite.config.ts maps GEMINI_API_KEY to process.env.API_KEY)
@@ -8,7 +7,6 @@ if (!API_KEY) {
     console.error("Gemini API key is not set. Define GEMINI_API_KEY in .env.local.");
 }
 
-const ai = new GoogleGenAI({ apiKey: API_KEY! });
 
 const cvContext = `
 Vous êtes un assistant IA pour le portfolio d'Abdessamad Biya. 
@@ -59,7 +57,10 @@ export const chatWithAI = async (message: string): Promise<string> => {
     }
 
     try {
-        const response = await ai.models.generateContent({
+    // Defer-load the SDK to avoid loading it at startup
+    const { GoogleGenAI } = await import('@google/genai');
+    const ai = new GoogleGenAI({ apiKey: API_KEY! });
+    const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
             contents: message,
             config: {
